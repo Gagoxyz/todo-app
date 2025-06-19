@@ -1,0 +1,4 @@
+node_modules/
+.env
+idea.txt
+pass_mongodb_atlas.txt
