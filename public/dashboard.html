@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - ToDo Trello</title>
+    <link rel="stylesheet" href="assets/css/dashboard.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Mis tareas</h1>
+        <button id="logoutBtn">Cerrar sesión</button>
+    </header>
+
+    <main>
+        <section class="task-column" data-status="todo">
+            <h2>Pendiente</h2>
+            <div class="task-list" id="todo"></div>
+        </section>
+
+        <section class="task-column" data-status="inProgress">
+            <h2>En progreso</h2>
+            <div class="task-list" id="inProgress"></div>
+        </section>
+
+        <section class="task-column" data-status="done">
+            <h2>Completada</h2>
+            <div class="task-list" id="done"></div>
+        </section>
+    </main>
+
+    <form id="newTaskForm" class="task-form">
+        <label for="title">Título de la tarea</label>
+        <input type="text" id="title" placeholder="Título de la tarea" required maxlength="100" />
+
+        <label for="description">Descripción</label>
+        <textarea id="description" placeholder="Descripción (opcional)" maxlength="1000"></textarea>
+
+        <button type="submit">Agregar</button>
+    </form>
+
+    <script src="assets/js/dashboard.js"></script>
+</body>
+
+</html>

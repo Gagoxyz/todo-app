@@ -5,9 +5,14 @@ const taskSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
+    maxlength: 100
   },
-  description: String,
 
+  description: {
+    type: String,
+    maxlength: 1000
+  },
+  
   status: {
     type: String,
     enum: ['todo', 'inProgress', 'done'],

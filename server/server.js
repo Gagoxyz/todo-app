@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path')
 
 // Configurar variables de entorno
 dotenv.config();
@@ -13,9 +14,12 @@ const app = express();
 app.use(cors());
 app.use(express.json()); // para parsear JSON
 
-// Rutas de prueba
-app.get('/', (req, res) => {
-  res.send('API funcionando correctamente');
+// Servir archivos estáticos desde ../public
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
+// Ruta raíz: servir index.html
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
 const authRoutes = require('./routes/authRoutes');

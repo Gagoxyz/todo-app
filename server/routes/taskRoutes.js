@@ -8,17 +8,29 @@ const router = express.Router();
 // ✅ Crear tarea
 router.post('/', auth, async (req, res) => {
   try {
-    const { title, description, status } = req.body;
-    const task = new Task({
+    const { title, description, status = 'todo' } = req.body;
+
+    if (!title) {
+      return res.status(400).json({ msg: 'El título es obligatorio' });
+    }
+    if (title.length > 100) {
+      return res.status(400).json({ msg: 'El título no puede superar los 100 caracteres' });
+    }
+    if (description && description.length > 1000) {
+      return res.status(400).json({ msg: 'La descripción no puede superar los 1000 caracteres' });
+    }
+
+    const newTask = new Task({
       title,
       description,
-      status: status || 'todo',
+      status,
       user: req.user.id,
     });
 
-    const saved = await task.save();
-    res.status(201).json(saved);
+    const savedTask = await newTask.save();
+    res.status(201).json(savedTask);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ msg: 'Error al crear tarea' });
   }
 });

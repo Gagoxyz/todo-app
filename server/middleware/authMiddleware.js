@@ -8,8 +8,8 @@ function authMiddleware(req, res, next) {
     return res.status(401).json({ msg: 'Acceso denegado. No hay token.' });
 
   try {
-    const decoded = jwt.verify(token, process.env.SECRET_KEY);
-    req.user = decoded; // Aquí tienes acceso a req.user.id y req.user.username
+    const verified = jwt.verify(token, process.env.SECRET_KEY);
+    req.user = verified;
     next();
   } catch (err) {
     return res.status(401).json({ msg: 'Token inválido' });

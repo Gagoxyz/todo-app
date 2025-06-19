@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aplicación de tareas - Login</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="main-container">
+    <section class="intro-section">
+      <h1>Tablero de tareas</h1>
+      <p>
+        Espacio personal para gestionar tareas de forma sencilla y efectiva. Aquí podrás crear,
+        organizar y actualizar tus tareas en tres estados: pendientes, en progreso y completadas.
+      </p>
+      <p>
+        Para acceder, necesitas autenticarte con tu usuario. Si aún no tienes cuenta, solo debes registrarte; no
+        solicitamos correos electrónicos ni datos personales.
+      </p>
+      <p>
+        Podrás acceder a tus tareas desde cualquier dispositivo, en cualquier momento.
+      </p>
+    </section>
+
+    <div class="auth-container">
+      <div class="tab-buttons">
+        <button type="button" class="tab-btn active" data-tab="login">Login</button>
+        <button type="button" class="tab-btn" data-tab="register">Registro</button>
+      </div>
+
+      <form id="loginForm" class="active">
+        <input type="text" placeholder="Usuario" name="username" required />
+        <input type="password" placeholder="Contraseña" name="password" required />
+        <button type="submit">Entrar</button>
+      </form>
+
+      <form id="registerForm">
+        <input type="text" placeholder="Usuario" name="username" required />
+        <input type="password" placeholder="Contraseña" name="password" required />
+        <input type="password" placeholder="Repite contraseña" name="confirmPassword" required />
+        <button type="submit">Registrarse</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/auth.js"></script>
+  <script>
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const forms = {
+      login: document.getElementById('loginForm'),
+      register: document.getElementById('registerForm')
+    };
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        Object.values(forms).forEach(f => f.classList.remove('active'));
+        forms[btn.dataset.tab].classList.add('active');
+      });
+    });
+  </script>
+</body>
+
+</html>
