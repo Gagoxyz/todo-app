@@ -1,4 +1,4 @@
-const API_URL = 'https://todo-app-backend-vh5h.onrender.com/api/auth';
+const API_URL = 'https://todo-app-uws4.onrender.com/api/auth';
 
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
   e.preventDefault();
