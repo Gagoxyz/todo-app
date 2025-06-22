@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Simula obtener el nombre del usuario (puede venir de localStorage, API, etc.)
   const username = localStorage.getItem('user');
 
-  welcome.textContent = `Bienvenido al tablón de tareas, ${username}`;
+  welcome.textContent = `Bienvenid@ al tablón de tareas, ${username}`;
 });
 
 
