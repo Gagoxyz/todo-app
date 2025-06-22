@@ -1,96 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+/* Fondo */
 body {
-    font-family: sans-serif;
-    background: #f0f2f5;
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background: url('../images/dolomites-2897227.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+  overflow-y: auto;
+  color: #f5f5f5;
 }
 
+/* Capa oscura */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+/* Z-index general */
+header, main, form {
+  position: relative;
+  z-index: 1;
+}
+
+/* Encabezado */
 header {
-    background: #2c3e50;
-    color: white;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-main {
-    display: flex;
-    justify-content: space-around;
-    padding: 2rem;
-    gap: 1rem;
+header h1 {
+  font-weight: 400;
+  margin: 0;
 }
 
-.task-column {
-    background: #ecf0f1;
-    padding: 1rem;
-    border-radius: 8px;
-    width: 30%;
-    min-height: 300px;
-}
-
-.task-list {
-    min-height: 200px;
-    padding: 0.5rem;
-    border: 2px dashed #bdc3c7;
-    border-radius: 6px;
-}
-
-.task {
-    background: white;
-    padding: 0.5rem;
-    margin: 0.5rem 0;
-    border-radius: 4px;
-    cursor: grab;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-form {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin: 2rem;
-}
-
-.task-form {
-  max-width: 400px;
-  margin: 30px auto;
-  padding: 20px;
-  background: #f9f9f9;
-  border: 1px solid #ddd;
+#logoutBtn {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
   border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+#logoutBtn:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Contenedor de columnas */
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem 1rem;
+}
+
+/* Columna de tareas */
+.task-column {
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 1rem;
+  width: 300px;
+  min-height: 300px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.task-column h2 {
+  text-align: center;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  color: #f4e2d8;
+}
+
+/* Lista de tareas */
+.task-list {
+  min-height: 200px;
+  padding: 0.5rem;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+}
+
+/* Tarjetas individuales */
+.task {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border-radius: 10px;
+  cursor: grab;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: transform 0.1s;
+  color: #f5f5f5;
+}
+
+.task:hover {
+  transform: scale(1.02);
+}
+
+/* Formulario para agregar tarea */
+.task-form {
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 2rem auto;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  gap: 1rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
 .task-form label {
-  font-weight: bold;
-  font-size: 0.95rem;
-  color: #333;
+  font-weight: 500;
+  color: #eee;
 }
 
 .task-form input,
 .task-form textarea {
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 0.95rem;
   resize: vertical;
 }
 
+.task-form input::placeholder,
+.task-form textarea::placeholder {
+  color: #ccc;
+}
+
 .task-form button {
-  padding: 10px;
-  background-color: #3f51b5;
-  color: white;
+  padding: 0.8rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
   border: none;
-  border-radius: 6px;
-  font-size: 1rem;
+  border-radius: 10px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .task-form button:hover {
-  background-color: #2c3e9f;
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Colores por tipo de columna */
+.task-column.todo {
+  background-color: rgba(0, 123, 255, 0.15); /* Azul */
+  border: 1px solid rgba(0, 123, 255, 0.4);
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
+}
+
+.task-column.inProgress {
+  background-color: rgba(255, 152, 0, 0.15); /* Naranja */
+  border: 1px solid rgba(255, 152, 0, 0.4);
+  box-shadow: 0 0 15px rgba(255, 152, 0, 0.3);
+}
+
+.task-column.done {
+  background-color: rgba(40, 167, 69, 0.15); /* Verde */
+  border: 1px solid rgba(40, 167, 69, 0.4);
+  box-shadow: 0 0 15px rgba(40, 167, 69, 0.3);
+}
+
+/* Opcional: cambiar color de títulos */
+.todo h2 {
+  color: #66b3ff;
+}
+.inProgress h2 {
+  color: #ffb74d;
+}
+.done h2 {
+  color: #7cd67c;
+}
+
+/* Estilo de tareas dentro de cada columna */
+
+.task-column.todo .task {
+  border-left: 4px solid #007bff; /* Azul */
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.task-column.inProgress .task {
+  border-left: 4px solid #ff9800; /* Naranja */
+  background-color: rgba(255, 152, 0, 0.1);
+}
+
+.task-column.done .task {
+  border-left: 4px solid #28a745; /* Verde */
+  background-color: rgba(40, 167, 69, 0.1);
 }
