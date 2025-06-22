@@ -8,8 +8,20 @@ if (!token) {
 // Logout
 document.getElementById('logoutBtn').addEventListener('click', () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     window.location.href = '/';
 });
+
+// Bienvenida usuario
+document.addEventListener('DOMContentLoaded', () => {
+  const welcome = document.getElementById('welcomeMessage');
+
+  // Simula obtener el nombre del usuario (puede venir de localStorage, API, etc.)
+  const username = localStorage.getItem('user');
+
+  welcome.textContent = `Bienvenido al tablón de tareas, ${username}`;
+});
+
 
 // Crear tarea
 document.getElementById('newTaskForm').addEventListener('submit', async (e) => {

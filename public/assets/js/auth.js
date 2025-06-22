@@ -16,6 +16,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
   if (res.ok) {
     localStorage.setItem('token', data.token);
+    localStorage.setItem('user', username);
     window.location.href = 'dashboard.html';
   } else {
     alert(data.msg || 'Error al iniciar sesión');
