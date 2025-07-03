@@ -14,12 +14,12 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
 
 // Bienvenida usuario
 document.addEventListener('DOMContentLoaded', () => {
-  const welcome = document.getElementById('welcomeMessage');
+    const welcome = document.getElementById('welcomeMessage');
 
-  // Simula obtener el nombre del usuario (puede venir de localStorage, API, etc.)
-  const username = localStorage.getItem('user');
+    // Simula obtener el nombre del usuario (puede venir de localStorage, API, etc.)
+    const username = localStorage.getItem('user');
 
-  welcome.textContent = `Bienvenid@ al tablón de tareas, ${username}`;
+    welcome.textContent = `Bienvenid@ al tablón de tareas, ${username}`;
 });
 
 
@@ -75,7 +75,64 @@ function renderTask(task) {
     div.innerHTML = `
         <strong>${task.title}</strong>
         ${task.description ? `<p>${task.description}</p>` : ''}
+        <div class="task-actions">
+            <button class="edit-btn">✏️</button>
+            <button class="delete-btn">🗑️</button>
+        </div>
     `;
+
+    // Botón eliminar
+    div.querySelector('.delete-btn').addEventListener('click', async () => {
+        const confirmDelete = confirm('¿Deseas eliminar esta tarea?');
+        if (!confirmDelete) return;
+
+        const res = await fetch(`${API_URL}/${task._id}`, {
+            method: 'DELETE',
+            headers: { Authorization: token }
+        });
+
+        if (res.ok) {
+            div.remove();
+        } else {
+            alert('Error al eliminar la tarea');
+        }
+    });
+
+    // Botón editar
+    div.querySelector('.edit-btn').addEventListener('click', async () => {
+        const newTitle = prompt('Nuevo título:', task.title);
+        if (!newTitle) return;
+
+        const newDescription = prompt('Nueva descripción:', task.description || '');
+
+        const res = await fetch(`${API_URL}/${task._id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: token
+            },
+            body: JSON.stringify({ title: newTitle, description: newDescription })
+        });
+
+        if (res.ok) {
+            // Actualiza visualmente
+            div.querySelector('strong').textContent = newTitle;
+            if (newDescription) {
+                if (div.querySelector('p')) {
+                    div.querySelector('p').textContent = newDescription;
+                } else {
+                    const p = document.createElement('p');
+                    p.textContent = newDescription;
+                    div.insertBefore(p, div.querySelector('.task-actions'));
+                }
+            } else {
+                const p = div.querySelector('p');
+                if (p) p.remove();
+            }
+        } else {
+            alert('Error al editar la tarea');
+        }
+    });
 
     // Drag events
     div.addEventListener('dragstart', (e) => {
