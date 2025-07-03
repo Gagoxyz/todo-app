@@ -76,8 +76,8 @@ function renderTask(task) {
         <strong>${task.title}</strong>
         ${task.description ? `<p>${task.description}</p>` : ''}
         <div class="task-actions">
-            <button class="edit-btn"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
-            <button class="delete-btn"><i class="fa-solid fa-trash"></i> Borrar</button>
+            <button class="edit-btn"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button class="delete-btn"><i class="fa-solid fa-trash"></i></button>
         </div>
     `;
 
